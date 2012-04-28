@@ -35,17 +35,75 @@
 // ALog always displays output regardless of the DEBUG setting
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
+
+/** This class is meant to be subclassed an can be used for mapping JSON or XML from restful API's to model classes.
+ */
+
 @interface MMObjectModel : NSObject {
     
 }
 
+/**-------------------------------------------------------------------------------------
+ @name Initializing an 'MMObjectModel' Object
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ creates and returns a `MMObjectModel` object initialized using the provided dictionary
+ 
+ @param dictionary A dictionary.
+ @returns A `MMObjectModel` object 
+ @see initWithJSONData:
+ */
 - (id)initWithDictionary:(NSMutableDictionary *)dictionary;
-- (id)initWithJSONData: (NSData *)jsonData ;
+
+/**
+ creates and returns a `MMObjectModel` object initialized using the provided JSON data object
+ 
+ @param jsonData An 'NSData' object containing JSON.
+ @returns A `MMObjectModel` object 
+ @see initWithDictionary:
+ */
+- (id)initWithJSONData:(NSData *)jsonData;
+
+/**
+ Returns a dictionary presentation of this object.
+ */
 - (NSDictionary *)dictionary;
+
+/**-------------------------------------------------------------------------------------
+ @name Serialization methods
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Returns JSON data in compact format (without spaces and indents).
+ */
 - (NSData *)jsonData;
+
+/**
+ Returns an JSON data in prettyfied format.
+ */
 - (NSData *)prettyJsonData;
+
+/**
+ Returns a JSON string in compact format (without spaces and indents).
+ */
 - (NSString *)jsonString;
+
+/**
+ Returns a JSON string in prettyfied format.
+ */
 - (NSString *)prettyJsonString;
+
+/**-------------------------------------------------------------------------------------
+ @name Other methods
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Returns an array with all property of this class.
+ */
 - (NSArray *)allKeys;
 
 @end

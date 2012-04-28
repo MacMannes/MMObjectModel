@@ -26,6 +26,9 @@
 
 #import <Foundation/Foundation.h>
 
+/** Instances of this class parse XML documents and converts them to NSMutableDictionaries, so they can be handled as easy as parsed JSON objects.
+ */
+
 @interface MMXMLreader : NSObject <NSXMLParserDelegate> {
     NSXMLParser *_xmlParser;
     
@@ -33,7 +36,30 @@
     NSMutableString *_textInProgress;    
 }
 
+/**-------------------------------------------------------------------------------------
+ @name Initializing a Parser Object
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Initializes the receiver with the given URL.
+ 
+ @param url The URL to the XML file.
+ @returns An initialized `MMXMLreader` object or nil if an error occurs. 
+ */
 - (id)initWithURL:(NSURL *)url;
+
+/**-------------------------------------------------------------------------------------
+ @name Parsing
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Starts the parsing operation and returns an 'NSMutableDictionary' object if succesful.
+ 
+ @returns An `NSMutableDictionary` object or nil if an error occurs. 
+ */
+
 - (NSMutableDictionary *)convertToDictionary;
 
 @end
