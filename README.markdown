@@ -4,7 +4,7 @@ MMObjectModel is a handy superclass for mapping JSON or XML data to model classe
 Documentation
 -------------
 
-Documentation can be [browsed online](http://macmannes.github.com/MMObjectModel) or installed in your Xcode Organizer via the [Atom Feed URL](http://macmannes.github.com/MMObjectModel/MMObjectModel).
+Documentation can be [browsed online](http://macmannes.github.com/MMObjectModel) or installed in your Xcode Organizer via the [Atom Feed URL](http://macmannes.github.com/MMObjectModel/MMObjectModel.atom).
 
 ### Todo
 Samples
