@@ -1,8 +1,13 @@
 ### Overview
 MMObjectModel is a handy superclass for mapping JSON or XML data to model classes.
 
+Documentation
+-------------
+
+Documentation can be [browsed online](http://macmannes.github.com/MMObjectModel) or installed in your Xcode Organizer via the [Atom Feed URL](http://macmannes.github.com/MMObjectModel/MMObjectModel).
+
 ### Todo
-Documentation and samples
+Samples
 
 ### License
 MMObjectModel is licensed under MIT License Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
