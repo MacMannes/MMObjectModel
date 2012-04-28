@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
+    <id>http://macmannes.github.com/MMObjectModel/MMObjectModel.atom/20120428152551</id>
+    <title type="text">MMObjectModel Documentation</title>
+    <rights>Copyright © 2012 MacMannes. All rights reserved.</rights>
+    <link rel="self" href="http://macmannes.github.com/MMObjectModel/MMObjectModel.atom"></link>
+    <docset:publisherName>MacMannes</docset:publisherName>
+    <docset:publisherID>nl.macmannes.documentation</docset:publisherID>
+    <updated>2012-04-28T15:25:51+02:00</updated>
+    <entry>
+        <id>tag:macmannes.github.com,2012-04-28:nl.macmannes.MMObjectModel/1.0.0</id>
+        <title type="text">MMObjectModel Documentation</title>
+        <updated>2012-04-28T15:25:51+02:00</updated>
+        <content type="text">MMObjectModel Documentation (v1.0.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="http://macmannes.github.com/MMObjectModel/nl.macmannes.MMObjectModel-1.0.xar" length="36167"></link>
+        <docset:identifier>nl.macmannes.MMObjectModel</docset:identifier>
+        <docset:version>1.0.0</docset:version>
+        <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
+    </entry>
+</feed>
