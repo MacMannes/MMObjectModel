@@ -29,7 +29,7 @@
 /** Instances of this class parse XML documents and converts them to NSMutableDictionaries, so they can be handled as easy as parsed JSON objects.
  */
 
-@interface MMXMLreader : NSObject <NSXMLParserDelegate> {
+@interface MMXMLReader : NSObject <NSXMLParserDelegate> {
     NSXMLParser *_xmlParser;
     
     NSMutableArray *_dictionaryStack;

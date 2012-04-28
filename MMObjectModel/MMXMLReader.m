@@ -23,9 +23,9 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "MMXMLreader.h"
+#import "MMXMLReader.h"
 
-@implementation MMXMLreader 
+@implementation MMXMLReader 
 
 - (id)initWithURL:(NSURL *)url
 {
