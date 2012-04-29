@@ -25,22 +25,36 @@
 
 #import "MMXMLReader.h"
 
+@interface MMXMLReader (PRIVATE)
+
+- (void)performInitialization;
+
+@end
+
 @implementation MMXMLReader 
 
 - (id)initWithURL:(NSURL *)url
 {
     if (self = [super init]) {
-        _dictionaryStack = [[NSMutableArray alloc] init];
-        _textInProgress = [[NSMutableString alloc] init];
-        
-        // Initialize the stack with a fresh dictionary
-        [_dictionaryStack addObject:[NSMutableDictionary dictionary]];        
+        [self performInitialization];
         
         _xmlParser = [[NSXMLParser alloc] initWithContentsOfURL:url];        
         [_xmlParser setDelegate:self];
     }
     return self;
 }
+
+- (id)initWithData:(NSData *)data
+{
+    if (self = [super init]) {
+        [self performInitialization];
+        
+        _xmlParser = [[NSXMLParser alloc] initWithData:data];        
+        [_xmlParser setDelegate:self];
+    }
+    return self;
+}
+
 
 - (NSMutableDictionary *)convertToDictionary 
 {
@@ -49,6 +63,16 @@
     }    
     
     return nil;
+}
+
+- (void)performInitialization
+{
+    _dictionaryStack = [[NSMutableArray alloc] init];
+    _textInProgress = [[NSMutableString alloc] init];
+    
+    // Initialize the stack with a fresh dictionary
+    [_dictionaryStack addObject:[NSMutableDictionary dictionary]];        
+
 }
 
 #pragma mark - NSXMLParserDelegate

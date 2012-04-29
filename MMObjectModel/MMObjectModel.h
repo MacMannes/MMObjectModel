@@ -54,27 +54,54 @@
  @param dictionary A dictionary.
  @returns A `MMObjectModel` object 
  @see initWithJSONData:
+ @see initWithXMLData:
+ @see initWithXMLData:rootElement:
  */
 - (id)initWithDictionary:(NSMutableDictionary *)dictionary;
 
 /**
  creates and returns a `MMObjectModel` object initialized using the provided JSON data object
  
- @param jsonData An 'NSData' object containing JSON.
+ @param jsonData An `NSData` object containing JSON.
  @returns A `MMObjectModel` object 
  @see initWithDictionary:
+ @see initWithXMLData:
+ @see initWithXMLData:rootElement:
  */
 - (id)initWithJSONData:(NSData *)jsonData;
 
 /**
- Returns a dictionary presentation of this object.
+ creates and returns a `MMObjectModel` object initialized using the provided JSON data object
+ 
+ @param xmlData An `NSData` object containing XML.
+ @returns A `MMObjectModel` object 
+ @see initWithXMLData:rootElement:
+ @see initWithJSONData:
+ @see initWithDictionary:
  */
-- (NSDictionary *)dictionary;
+- (id)initWithXMLData:(NSData *)xmlData;
+
+/**
+ creates and returns a `MMObjectModel` object initialized using the provided JSON data object
+ 
+ @param xmlData An `NSData` object containing XML.
+ @param rootElement An `NSString` object containing the name of the XML root element.
+ @returns A `MMObjectModel` object 
+ @see initWithJSONData:
+ @see initWithDictionary:
+ @see initWithXMLData:
+ */
+- (id)initWithXMLData:(NSData *)xmlData rootElement:(NSString *)rootElement;
 
 /**-------------------------------------------------------------------------------------
  @name Serialization methods
  ---------------------------------------------------------------------------------------
  */
+
+/**
+ Returns a dictionary presentation of this object.
+ */
+- (NSDictionary *)dictionary;
 
 /**
  Returns JSON data in compact format (without spaces and indents).

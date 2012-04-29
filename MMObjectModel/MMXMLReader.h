@@ -21,8 +21,7 @@
 //  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE. Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
+//  THE SOFTWARE. 
 
 #import <Foundation/Foundation.h>
 
@@ -49,13 +48,22 @@
  */
 - (id)initWithURL:(NSURL *)url;
 
+/**
+ Initializes the receiver with the XML contents encapsulated in a given data object.
+ 
+ @param data An `NSData` object containing XML markup.
+ @returns An initialized `MMXMLreader` object or nil if an error occurs. 
+ */
+- (id)initWithData:(NSData *)data;
+
+
 /**-------------------------------------------------------------------------------------
  @name Parsing
  ---------------------------------------------------------------------------------------
  */
 
 /**
- Starts the parsing operation and returns an 'NSMutableDictionary' object if succesful.
+ Starts the parsing operation and returns an `NSMutableDictionary` object if succesful.
  
  @returns An `NSMutableDictionary` object or nil if an error occurs. 
  */

@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 
 #import "MMObjectModel.h"
+#import "MMXMLReader.h"
 #import <objc/runtime.h>
 
 @implementation MMObjectModel
@@ -45,6 +46,32 @@
     } else {
         return [self initWithDictionary:jsonDict];
     }
+}
+
+- (id)initWithXMLData:(NSData *)xmlData
+{
+    return [self initWithXMLData:xmlData rootElement:nil];
+}
+
+- (id)initWithXMLData:(NSData *)xmlData rootElement:(NSString *)rootElement
+{
+    MMXMLReader *reader = [[MMXMLReader alloc] initWithData:xmlData];
+    if (reader) {
+        NSMutableDictionary *xmlDict = [reader convertToDictionary];
+        if (xmlDict) {
+            if (rootElement) {
+                NSMutableDictionary *rootDict = [xmlDict objectForKey:rootElement];
+                if (rootDict) {
+                    return [self initWithDictionary:rootDict];
+                }
+            } else {
+                return [self initWithDictionary:xmlDict];
+            }
+        }
+    }
+    
+    return nil;
+    
 }
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key 
