@@ -52,6 +52,10 @@
 	
 	<option value="//api/name/initWithJSONData:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithJSONData:</option>
 	
+	<option value="//api/name/initWithXMLData:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithXMLData:</option>
+	
+	<option value="//api/name/initWithXMLData:rootElement:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithXMLData:rootElement:</option>
+	
 	<option value="//api/name/jsonData">&nbsp;&nbsp;&nbsp;&nbsp;- jsonData</option>
 	
 	<option value="//api/name/jsonString">&nbsp;&nbsp;&nbsp;&nbsp;- jsonString</option>
@@ -101,6 +105,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithDictionary:">initWithDictionary:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithJSONData:">initWithJSONData:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithXMLData:">initWithXMLData:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithXMLData:rootElement:">initWithXMLData:rootElement:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/jsonData">jsonData</a></span></li>
 	
@@ -179,8 +187,15 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/dictionary">&ndash;&nbsp;dictionary</a></code>
-		<span class="tooltip"><p>Returns a dictionary presentation of this object.</p></span>
+		<code><a href="#//api/name/initWithXMLData:">&ndash;&nbsp;initWithXMLData:</a></code>
+		<span class="tooltip"><p>creates and returns a <code>MMObjectModel</code> object initialized using the provided JSON data object</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithXMLData:rootElement:">&ndash;&nbsp;initWithXMLData:rootElement:</a></code>
+		<span class="tooltip"><p>creates and returns a <code>MMObjectModel</code> object initialized using the provided JSON data object</p></span>
 	</span>
 	
 	
@@ -193,6 +208,13 @@
 
 						<ul class="task-list">
 							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/dictionary">&ndash;&nbsp;dictionary</a></code>
+		<span class="tooltip"><p>Returns a dictionary presentation of this object.</p></span>
+	</span>
+	
+	
+</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/jsonData">&ndash;&nbsp;jsonData</a></code>
 		<span class="tooltip"><p>Returns JSON data in compact format (without spaces and indents).</p></span>
@@ -371,6 +393,10 @@
 			
 			<li><code><p><a href="#//api/name/initWithJSONData:">&ndash; initWithJSONData:</a></p></code></li>
 			
+			<li><code><p><a href="#//api/name/initWithXMLData:">&ndash; initWithXMLData:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithXMLData:rootElement:">&ndash; initWithXMLData:rootElement:</a></p></code></li>
+			
 		</ul>
 	</div>
 	
@@ -405,7 +431,7 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>jsonData</em></dt>
-			<dd><p>An &lsquo;NSData&rsquo; object containing JSON.</p></dd>
+			<dd><p>An <code>NSData</code> object containing JSON.</p></dd>
 		</dl>
 		
 	</div>
@@ -430,6 +456,143 @@
 		<ul>
 			
 			<li><code><p><a href="#//api/name/initWithDictionary:">&ndash; initWithDictionary:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithXMLData:">&ndash; initWithXMLData:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithXMLData:rootElement:">&ndash; initWithXMLData:rootElement:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MMObjectModel.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithXMLData:" title="initWithXMLData:"></a>
+	<h3 class="subsubtitle method-title">initWithXMLData:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>creates and returns a <code>MMObjectModel</code> object initialized using the provided JSON data object</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithXMLData:(NSData *)<em>xmlData</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>xmlData</em></dt>
+			<dd><p>An <code>NSData</code> object containing XML.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A <code>MMObjectModel</code> object</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithXMLData:rootElement:">&ndash; initWithXMLData:rootElement:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithJSONData:">&ndash; initWithJSONData:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithDictionary:">&ndash; initWithDictionary:</a></p></code></li>
+			
+		</ul>
+	</div>
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">MMObjectModel.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithXMLData:rootElement:" title="initWithXMLData:rootElement:"></a>
+	<h3 class="subsubtitle method-title">initWithXMLData:rootElement:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>creates and returns a <code>MMObjectModel</code> object initialized using the provided JSON data object</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (id)initWithXMLData:(NSData *)<em>xmlData</em> rootElement:(NSString *)<em>rootElement</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>xmlData</em></dt>
+			<dd><p>An <code>NSData</code> object containing XML.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>rootElement</em></dt>
+			<dd><p>An <code>NSString</code> object containing the name of the XML root element.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A <code>MMObjectModel</code> object</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection see-also-section">
+		<h4 class="method-subtitle">See Also</h4>
+		<ul>
+			
+			<li><code><p><a href="#//api/name/initWithJSONData:">&ndash; initWithJSONData:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithDictionary:">&ndash; initWithDictionary:</a></p></code></li>
+			
+			<li><code><p><a href="#//api/name/initWithXMLData:">&ndash; initWithXMLData:</a></p></code></li>
 			
 		</ul>
 	</div>
@@ -601,7 +764,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 MacMannes. All rights reserved. (Last updated: 2012-04-28)</span><br />
+						<p><span class="copyright">&copy; 2012 MacMannes. All rights reserved. (Last updated: 2012-04-29)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 789)</a>.</span></p>
 						
