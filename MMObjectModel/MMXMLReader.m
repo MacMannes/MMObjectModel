@@ -79,6 +79,9 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
+    // Save the current element name:
+    _currentElementName = elementName;
+    
     // Get the dictionary for the current level in the stack
     NSMutableDictionary *parentDict = [_dictionaryStack lastObject];
     
@@ -119,7 +122,7 @@
     NSMutableDictionary *dictInProgress = [_dictionaryStack lastObject];
     
     // Set the text property
-    if ([_textInProgress length] > 0) {
+    if ([_textInProgress length] > 0 || [elementName isEqualToString:_currentElementName]) {
         // Pop the current dict
         [_dictionaryStack removeLastObject];
         dictInProgress = [_dictionaryStack lastObject];

@@ -32,7 +32,8 @@
     NSXMLParser *_xmlParser;
     
     NSMutableArray *_dictionaryStack;
-    NSMutableString *_textInProgress;    
+    NSMutableString *_textInProgress;
+    NSString *_currentElementName;
 }
 
 /**-------------------------------------------------------------------------------------
