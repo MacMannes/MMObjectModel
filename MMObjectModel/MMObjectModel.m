@@ -24,7 +24,6 @@
 //  THE SOFTWARE.
 
 #import "MMObjectModel.h"
-#import "MMXMLReader.h"
 #import <objc/runtime.h>
 
 @implementation MMObjectModel
