@@ -75,7 +75,7 @@
 
 - (void)setValue:(id)value forUndefinedKey:(NSString *)key 
 {
-    DLog(@"Undefined key: %@", key);
+    MMLog(@"Undefined key: %@", key);
 }
 
 - (id)valueForKey:(NSString *)key {

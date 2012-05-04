@@ -27,15 +27,10 @@
 #import "MMXMLReader.h"
 
 #ifdef DEBUG
-#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-#   define ELog(err) {if(err) DLog(@"%@", err)}
+#   define MMLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 #else
-#   define DLog(...)
+#   define MMLog(...)
 #endif
-
-// ALog always displays output regardless of the DEBUG setting
-#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
-
 
 /** This class is meant to be subclassed an can be used for mapping JSON or XML from restful API's to model classes.
  */
