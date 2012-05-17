@@ -28,7 +28,7 @@
 
 @implementation MMObjectModel
 
-- (id)initWithDictionary:(NSMutableDictionary *)dictionary 
+- (id)initWithDictionary:(NSDictionary *)dictionary 
 {
     if ((self = [super init])) {
         [self setValuesForKeysWithDictionary:dictionary];

@@ -53,7 +53,7 @@
  @see initWithXMLData:
  @see initWithXMLData:rootElement:
  */
-- (id)initWithDictionary:(NSMutableDictionary *)dictionary;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 /**
  creates and returns a `MMObjectModel` object initialized using the provided JSON data object
