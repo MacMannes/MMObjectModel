@@ -36,7 +36,7 @@
  */
 
 @interface MMObjectModel : NSObject {
-    
+    NSMutableDictionary *_objectModelKeys;
 }
 
 /**-------------------------------------------------------------------------------------

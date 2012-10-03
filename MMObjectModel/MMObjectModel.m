@@ -31,6 +31,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary 
 {
     if ((self = [super init])) {
+        _objectModelKeys = [self allObjectModelKeys];
         [self setValuesForKeysWithDictionary:dictionary];
     }
     return self;
@@ -73,7 +74,18 @@
     
 }
 
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key 
+- (void)setValue:(id)value forKey:(NSString *)key
+{
+    NSString *className = [self classNameForKey:key];
+    if (className) {
+        __strong Class valueClass = [[NSClassFromString(className) alloc] initWithDictionary:value];
+        [super setValue:valueClass forKey:key];
+    } else {
+        [super setValue:value forKey:key];
+    }
+}
+
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     MMLog(@"Undefined key: %@", key);
 }
@@ -98,6 +110,42 @@
     free(properties);
     
     return [NSArray arrayWithArray:propertyArray];
+}
+
+- (NSMutableDictionary *)allObjectModelKeys {
+    NSMutableDictionary* returnDictionary = [[NSMutableDictionary alloc] init];
+    
+    u_int count=0;
+    objc_property_t *props = class_copyPropertyList([self class],&count);
+    for (int i = 0; i < count; i++) {
+        const char *name = property_getName(props[i]);
+        const char *attr = property_getAttributes(props[i]);
+        NSString *attributtes = [NSString stringWithCString:attr encoding:NSUTF8StringEncoding];
+        if ([attributtes hasPrefix:@"T@"]) {
+            NSScanner *scanner = [NSScanner scannerWithString:attributtes];
+            NSString *className;
+            [scanner scanUpToString:@"\"" intoString:nil];
+            [scanner scanString:@"\"" intoString:nil];
+            [scanner scanUpToString:@"\"" intoString:&className];
+            if (className) {
+                Class myClass = NSClassFromString(className);
+                if ([myClass isSubclassOfClass:[MMObjectModel class]]) {
+                    [returnDictionary setValue:NSStringFromClass(myClass) forKey:[NSString stringWithCString:name encoding:NSUTF8StringEncoding]];
+                }
+            }
+        }
+    }
+    return returnDictionary;
+}
+
+- (NSString *)classNameForKey:(NSString *)aKey {
+    for (NSString *key in [_objectModelKeys allKeys]) {
+        if ([key compare:aKey options:NSCaseInsensitiveSearch] == NSOrderedSame) {
+            return [_objectModelKeys objectForKey:key];
+        }
+    }
+
+    return nil;
 }
 
 - (NSDictionary *)dictionary {
