@@ -28,7 +28,7 @@
 
 @implementation MMObjectModel
 
-- (id)initWithDictionary:(NSDictionary *)dictionary 
+- (id)initWithDictionary:(NSDictionary *)dictionary
 {
     if ((self = [super init])) {
         _objectModelKeys = [self allObjectModelKeys];
@@ -37,7 +37,7 @@
     return self;
 }
 
-- (id)initWithJSONData: (NSData *)jsonData 
+- (id)initWithJSONData: (NSData *)jsonData
 {
     NSError *jsonError;
     NSMutableDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&jsonError];
@@ -90,7 +90,8 @@
     MMLog(@"Undefined key: %@", key);
 }
 
-- (id)valueForKey:(NSString *)key {
+- (id)valueForKey:(NSString *)key
+{
     id value = [super valueForKey:key];
     if ([value isKindOfClass:[MMObjectModel class]]) {
         return (MMObjectModel *)[value dictionary];
@@ -98,7 +99,8 @@
     return value;
 }
 
-- (NSArray *)allKeys {
+- (NSArray *)allKeys
+{
     u_int count;
     
     objc_property_t *properties = class_copyPropertyList([self class], &count);
@@ -112,7 +114,8 @@
     return [NSArray arrayWithArray:propertyArray];
 }
 
-- (NSMutableDictionary *)allObjectModelKeys {
+- (NSMutableDictionary *)allObjectModelKeys
+{
     NSMutableDictionary* returnDictionary = [[NSMutableDictionary alloc] init];
     
     u_int count=0;
@@ -138,38 +141,44 @@
     return returnDictionary;
 }
 
-- (NSString *)classNameForKey:(NSString *)aKey {
+- (NSString *)classNameForKey:(NSString *)aKey
+{
     for (NSString *key in [_objectModelKeys allKeys]) {
         if ([key compare:aKey options:NSCaseInsensitiveSearch] == NSOrderedSame) {
             return [_objectModelKeys objectForKey:key];
         }
     }
-
+    
     return nil;
 }
 
-- (NSDictionary *)dictionary {
+- (NSDictionary *)dictionary
+{
     return [self dictionaryWithValuesForKeys:[self allKeys]];
 }
 
-- (NSData *)jsonData {
-    return  [NSJSONSerialization dataWithJSONObject:[self dictionary] 
+- (NSData *)jsonData
+{
+    return  [NSJSONSerialization dataWithJSONObject:[self dictionary]
                                             options:kNilOptions error:nil];
 }
 
-- (NSData *)prettyJsonData {
-    return  [NSJSONSerialization dataWithJSONObject:[self dictionary] 
+- (NSData *)prettyJsonData
+{
+    return  [NSJSONSerialization dataWithJSONObject:[self dictionary]
                                             options:NSJSONWritingPrettyPrinted error:nil];
 }
 
-- (NSString *)jsonString {
-    return [[NSString alloc] initWithData:[self jsonData] 
-                                 encoding:NSUTF8StringEncoding];    
+- (NSString *)jsonString
+{
+    return [[NSString alloc] initWithData:[self jsonData]
+                                 encoding:NSUTF8StringEncoding];
 }
 
-- (NSString *)prettyJsonString {
-    return [[NSString alloc] initWithData:[self prettyJsonData] 
-                                 encoding:NSUTF8StringEncoding];    
+- (NSString *)prettyJsonString
+{
+    return [[NSString alloc] initWithData:[self prettyJsonData]
+                                 encoding:NSUTF8StringEncoding];
 }
 
 @end
