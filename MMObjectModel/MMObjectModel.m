@@ -138,6 +138,8 @@
             }
         }
     }
+    free(props);
+    
     return returnDictionary;
 }
 
