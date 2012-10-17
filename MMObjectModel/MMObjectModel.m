@@ -28,50 +28,52 @@
 
 @implementation MMObjectModel
 
-- (id)initWithDictionary:(NSDictionary *)dictionary 
+- (id)initWithDictionary:(NSDictionary *)dictionary
 {
     if ((self = [super init])) {
         _objectModelKeys = [self allObjectModelKeys];
         [self setValuesForKeysWithDictionary:dictionary];
     }
+
     return self;
 }
 
-- (id)initWithJSONData: (NSData *)jsonData 
+- (id)initWithJSONData:(NSData *)jsonData
 {
     NSMutableDictionary *jsonDict = nil;
     NSError *jsonError = nil;
-    
+
     SEL _JSONKitSelector = NSSelectorFromString(@"objectFromJSONDataWithParseOptions:error:");
     id _NSJSONSerializationClass = NSClassFromString(@"NSJSONSerialization");
     SEL _NSJSONSerializationSelector = NSSelectorFromString(@"JSONObjectWithData:options:error:");
-    
-    
+
     if (_NSJSONSerializationClass && [_NSJSONSerializationClass respondsToSelector:_NSJSONSerializationSelector]) {
         jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:&jsonError];
     } else if (_JSONKitSelector && [jsonData respondsToSelector:_JSONKitSelector]) {
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[jsonData methodSignatureForSelector:_JSONKitSelector]];
         invocation.target = jsonData;
         invocation.selector = _JSONKitSelector;
-        
+
         NSUInteger parseOptionFlags = 0;
         [invocation setArgument:&parseOptionFlags atIndex:2]; // arguments 0 and 1 are self and _cmd respectively, automatically set by NSInvocation
+
         if (jsonError != NULL) {
             [invocation setArgument:&jsonError atIndex:3];
         }
-        
+
         [invocation invoke];
         __unsafe_unretained id JSON = nil;
         [invocation getReturnValue:&JSON];
+
         if (JSON) {
             jsonDict = [NSMutableDictionary dictionaryWithDictionary:JSON];
         }
     }
-    
+
     if (jsonDict && !jsonError) {
         return [self initWithDictionary:jsonDict];
     }
-    
+
     return nil;
 }
 
@@ -83,11 +85,14 @@
 - (id)initWithXMLData:(NSData *)xmlData rootElement:(NSString *)rootElement
 {
     MMXMLReader *reader = [[MMXMLReader alloc] initWithData:xmlData];
+
     if (reader) {
         NSMutableDictionary *xmlDict = [reader convertToDictionary];
+
         if (xmlDict) {
             if (rootElement) {
                 NSMutableDictionary *rootDict = [xmlDict objectForKey:rootElement];
+
                 if (rootDict) {
                     return [self initWithDictionary:rootDict];
                 }
@@ -96,16 +101,16 @@
             }
         }
     }
-    
+
     return nil;
-    
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key
 {
     NSString *className = [self classNameForKey:key];
+
     if (className) {
-        __strong Class valueClass = [[NSClassFromString(className) alloc] initWithDictionary:value];
+        __strong Class valueClass = [[NSClassFromString (className)alloc] initWithDictionary:value];
         [super setValue:valueClass forKey:key];
     } else {
         [super setValue:value forKey:key];
@@ -117,58 +122,70 @@
     MMLog(@"Undefined key: %@", key);
 }
 
-- (id)valueForKey:(NSString *)key {
+- (id)valueForKey:(NSString *)key
+{
     id value = [super valueForKey:key];
+
     if ([value isKindOfClass:[MMObjectModel class]]) {
         return (MMObjectModel *)[value dictionary];
     }
+
     return value;
 }
 
-- (NSArray *)allKeys {
+- (NSArray *)allKeys
+{
     u_int count;
-    
+
     objc_property_t *properties = class_copyPropertyList([self class], &count);
-    NSMutableArray* propertyArray = [NSMutableArray arrayWithCapacity:count];
+    NSMutableArray *propertyArray = [NSMutableArray arrayWithCapacity:count];
+
     for (int i = 0; i < count; i++) {
         const char *propertyName = property_getName(properties[i]);
         [propertyArray addObject:[NSString stringWithCString:propertyName encoding:NSUTF8StringEncoding]];
     }
+
     free(properties);
-    
+
     return [NSArray arrayWithArray:propertyArray];
 }
 
-- (NSMutableDictionary *)allObjectModelKeys {
-    NSMutableDictionary* returnDictionary = [[NSMutableDictionary alloc] init];
-    
-    u_int count=0;
-    objc_property_t *props = class_copyPropertyList([self class],&count);
+- (NSMutableDictionary *)allObjectModelKeys
+{
+    NSMutableDictionary *returnDictionary = [[NSMutableDictionary alloc] init];
+
+    u_int count = 0;
+    objc_property_t *props = class_copyPropertyList([self class], &count);
+
     for (int i = 0; i < count; i++) {
         const char *name = property_getName(props[i]);
         const char *attr = property_getAttributes(props[i]);
         NSString *attributtes = [NSString stringWithCString:attr encoding:NSUTF8StringEncoding];
+
         if ([attributtes hasPrefix:@"T@"]) {
             NSScanner *scanner = [NSScanner scannerWithString:attributtes];
             NSString *className;
             [scanner scanUpToString:@"\"" intoString:nil];
             [scanner scanString:@"\"" intoString:nil];
             [scanner scanUpToString:@"\"" intoString:&className];
+
             if (className) {
                 Class myClass = NSClassFromString(className);
+
                 if ([myClass isSubclassOfClass:[MMObjectModel class]]) {
                     [returnDictionary setValue:NSStringFromClass(myClass) forKey:[NSString stringWithCString:name encoding:NSUTF8StringEncoding]];
                 }
             }
         }
     }
-    
+
     free(props);
-    
+
     return returnDictionary;
 }
 
-- (NSString *)classNameForKey:(NSString *)aKey {
+- (NSString *)classNameForKey:(NSString *)aKey
+{
     for (NSString *key in [_objectModelKeys allKeys]) {
         if ([key compare:aKey options:NSCaseInsensitiveSearch] == NSOrderedSame) {
             return [_objectModelKeys objectForKey:key];
@@ -178,61 +195,63 @@
     return nil;
 }
 
-- (NSDictionary *)dictionary {
+- (NSDictionary *)dictionary
+{
     return [self dictionaryWithValuesForKeys:[self allKeys]];
 }
 
-- (NSData *)jsonData {
+- (NSData *)jsonData
+{
     NSData *data = nil;
-    
+
     id _NSJSONSerializationClass = NSClassFromString(@"NSJSONSerialization");
     SEL _NSJSONSerializationSelector = NSSelectorFromString(@"dataWithJSONObject:options:error:");
     SEL _JSONKitSelector = NSSelectorFromString(@"JSONData");
-    
+
     NSDictionary *dict = [self dictionary];
-    NSLog(@"dict: %@", dict);
-    
+
     if (_NSJSONSerializationClass && [_NSJSONSerializationClass respondsToSelector:_NSJSONSerializationSelector]) {
-        NSLog(@"Serializing via NSJSONSerialization");
         data = [NSJSONSerialization dataWithJSONObject:dict
                                                options:kNilOptions
                                                  error:nil];
     } else if (_JSONKitSelector && [dict respondsToSelector:_JSONKitSelector]) {
-        NSLog(@"Serializing via JSONKit");
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[dict methodSignatureForSelector:_JSONKitSelector]];
         invocation.target = dict;
         invocation.selector = _JSONKitSelector;
         __unsafe_unretained NSData *jKitData = nil;
-        
+
         [invocation invoke];
         [invocation getReturnValue:&jKitData];
         data = [NSData dataWithData:jKitData];
     }
-    
+
     return data;
 }
 
-- (NSData *)prettyJsonData {
+- (NSData *)prettyJsonData
+{
     id _NSJSONSerializationClass = NSClassFromString(@"NSJSONSerialization");
     SEL _NSJSONSerializationSelector = NSSelectorFromString(@"dataWithJSONObject:options:error:");
 
     if (_NSJSONSerializationClass && [_NSJSONSerializationClass respondsToSelector:_NSJSONSerializationSelector]) {
-        return  [NSJSONSerialization dataWithJSONObject:[self dictionary]
-                                                options:NSJSONWritingPrettyPrinted
-                                                  error:nil];
+        return [NSJSONSerialization dataWithJSONObject:[self dictionary]
+                                               options:NSJSONWritingPrettyPrinted
+                                                 error:nil];
     }
-    
+
     return [self jsonData];
 }
 
-- (NSString *)jsonString {
-    return [[NSString alloc] initWithData:[self jsonData] 
-                                 encoding:NSUTF8StringEncoding];    
+- (NSString *)jsonString
+{
+    return [[NSString alloc] initWithData:[self jsonData]
+                                 encoding:NSUTF8StringEncoding];
 }
 
-- (NSString *)prettyJsonString {
-    return [[NSString alloc] initWithData:[self prettyJsonData] 
-                                 encoding:NSUTF8StringEncoding];    
+- (NSString *)prettyJsonString
+{
+    return [[NSString alloc] initWithData:[self prettyJsonData]
+                                 encoding:NSUTF8StringEncoding];
 }
 
 @end
