@@ -142,5 +142,13 @@
  */
 - (NSArray *)arrayForObject:(id)object;
 
+/**
+ Converts items of an array to MMObjectModel class.
+ @param array a `NSArray`
+ @param objectModelClass a subclass of `MMobjectModel`
+ @returns a `NSArray` with objects converted to MMObjectModel class.
+ */
+- (NSArray *)convertObjectsOfArray:(NSArray *)array toClass:(id)objectModelClass;
+
 
 @end
