@@ -95,6 +95,16 @@
     id value = [super valueForKey:key];
     if ([value isKindOfClass:[MMObjectModel class]]) {
         return (MMObjectModel *)[value dictionary];
+    } else if ([value isKindOfClass:[NSArray class]]) {
+        NSMutableArray *returnArray = [[NSMutableArray alloc] initWithCapacity:[value count]];
+        for (id object in value) {
+            if ([object isKindOfClass:[MMObjectModel class]]) {
+                [returnArray addObject:(MMObjectModel *)[object dictionary]];
+            } else {
+                [returnArray addObject:value];
+            }
+        }
+        return returnArray;
     }
     return value;
 }
