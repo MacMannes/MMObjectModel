@@ -183,4 +183,9 @@
                                  encoding:NSUTF8StringEncoding];
 }
 
+- (NSString *)description
+{
+    return [self jsonString];
+}
+
 @end
