@@ -135,4 +135,12 @@
  */
 - (NSArray *)allKeys;
 
+/**
+ Returns an array for the given object (used for paresing XML arrays.
+ @param object an Object
+ @returns a `NSArray`
+ */
+- (NSArray *)arrayForObject:(id)object;
+
+
 @end

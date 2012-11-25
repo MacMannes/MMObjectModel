@@ -154,6 +154,15 @@
     return nil;
 }
 
+- (NSArray *)arrayForObject:(id)object
+{
+    if ([object isKindOfClass:[NSArray class]]) {
+        return object;
+    } else {
+        return [NSArray arrayWithObject:object];
+    }
+}
+
 - (NSDictionary *)dictionary
 {
     return [self dictionaryWithValuesForKeys:[self allKeys]];
