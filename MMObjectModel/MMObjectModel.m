@@ -195,6 +195,18 @@
     return nil;
 }
 
+- (NSArray *)convertObjectsOfArray:(NSArray *)array toClass:(id)objectModelClass
+{
+    NSMutableArray *returnArray = [[NSMutableArray alloc] init];
+    for (id item in array) {
+        if ([item isKindOfClass:[NSDictionary class]]) {
+            __strong Class objectModel = [[objectModelClass alloc] initWithDictionary:item];
+            [returnArray addObject:objectModel];
+        }
+    }
+    return returnArray;
+}
+
 - (NSDictionary *)dictionary
 {
     return [self dictionaryWithValuesForKeys:[self allKeys]];

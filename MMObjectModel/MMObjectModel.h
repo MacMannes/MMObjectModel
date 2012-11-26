@@ -129,4 +129,19 @@
  */
 - (NSArray *)allKeys;
 
+/**
+ Returns an array for the given object (used for paresing XML arrays.
+ @param object an Object
+ @returns a `NSArray`
+ */
+- (NSArray *)arrayForObject:(id)object;
+
+/**
+ Converts items of an array to MMObjectModel class.
+ @param array a `NSArray`
+ @param objectModelClass a subclass of `MMobjectModel`
+ @returns a `NSArray` with objects converted to MMObjectModel class.
+ */
+- (NSArray *)convertObjectsOfArray:(NSArray *)array toClass:(id)objectModelClass;
+
 @end
