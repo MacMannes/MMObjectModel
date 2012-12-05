@@ -166,11 +166,15 @@
 
 - (NSArray *)arrayForObject:(id)object
 {
-    if ([object isKindOfClass:[NSArray class]]) {
-        return object;
-    } else {
-        return [NSArray arrayWithObject:object];
+    if (object) {
+        if ([object isKindOfClass:[NSArray class]]) {
+            return object;
+        } else {
+            return [NSArray arrayWithObject:object];
+        }
     }
+    
+    return [NSArray array];
 }
 
 - (NSArray *)convertObjectsOfArray:(NSArray *)array toClass:(id)objectModelClass
