@@ -37,6 +37,21 @@
 }
 
 /**-------------------------------------------------------------------------------------
+ @name Controling Parser behavior
+ ---------------------------------------------------------------------------------------
+ */
+
+/**
+ Indicates whether the receiver reports the namespace and the qualified name of an element. The default value os `NO`;
+ */
+@property (nonatomic, assign) bool shouldProcessNamespaces;
+
+/**
+ Indicates whether the receiver reports the prefixes indicating the scope of namespace declarations. The default value os `NO`
+ */
+@property (nonatomic, assign) bool shouldReportNamespacePrefixes;
+
+/**-------------------------------------------------------------------------------------
  @name Initializing a Parser Object
  ---------------------------------------------------------------------------------------
  */

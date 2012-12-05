@@ -31,7 +31,10 @@
 
 @end
 
-@implementation MMXMLReader 
+@implementation MMXMLReader
+
+@synthesize shouldProcessNamespaces = _shouldProcessNamespaces;
+@synthesize shouldReportNamespacePrefixes = _shouldReportNamespacePrefixes;
 
 - (id)initWithURL:(NSURL *)url
 {
@@ -58,6 +61,9 @@
 
 - (NSMutableDictionary *)convertToDictionary 
 {
+    [_xmlParser setShouldProcessNamespaces:self.shouldProcessNamespaces];
+    [_xmlParser setShouldReportNamespacePrefixes:self.shouldProcessNamespaces];
+    
     if ([_xmlParser parse]) {
        return [_dictionaryStack objectAtIndex:0];
     }    
