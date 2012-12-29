@@ -129,9 +129,19 @@
     
     // Set the text property
     if ([_textInProgress length] > 0 || [elementName isEqualToString:_currentElementName]) {
+        NSDictionary *attributesDict = nil;
+        if ([[dictInProgress allKeys] count]) {
+            // Save attributes of current dict
+            attributesDict = [dictInProgress copy];
+        }
+        
         // Pop the current dict
         [_dictionaryStack removeLastObject];
         dictInProgress = [_dictionaryStack lastObject];
+        if (attributesDict) {
+            // Add attributes to parent dict
+            [dictInProgress setValuesForKeysWithDictionary:attributesDict];
+        }
         
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init]; 
         NSNumber *number = [numberFormatter numberFromString:_textInProgress]; 
