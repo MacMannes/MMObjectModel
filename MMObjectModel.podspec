@@ -1,5 +1,5 @@
 Pod::Spec.new do |spec|
-  spec.name         = 'MMObjectModel.podspec'
+  spec.name         = 'MMObjectModel'
   spec.version      = '0.0.1'
   spec.summary      = "Handy superclass for mapping JSON or XML data to model classes"
   spec.homepage     = "https://github.com/MacMannes/MMObjectModel"
