@@ -143,15 +143,7 @@
             [dictInProgress setValuesForKeysWithDictionary:attributesDict];
         }
         
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init]; 
-        NSNumber *number = [numberFormatter numberFromString:_textInProgress]; 
-
-        if (number) {
-            [dictInProgress setObject:number forKey:elementName];
-        }
-        else {
-            [dictInProgress setObject:_textInProgress forKey:elementName];
-        }
+        [dictInProgress setObject:_textInProgress forKey:elementName];
         
         // Reset the text
         _textInProgress = nil;
